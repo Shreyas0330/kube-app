@@ -1,0 +1,24 @@
+// Required modules
+const redis = require('redis');
+
+// Redis client
+const client = redis.createClient({ 
+    host: 'your_host', // Specify the host here
+    port: 9999 // Specify the port here
+});
+
+// Function to read messages from Redis list
+function readMessagesFromList(listName) {
+    client.lrange(listName, 0, -1, (err, messages) => {
+        if (err) {
+            console.error('Error:', err);
+        } else {
+            console.log('Messages from list:', messages);
+        }
+    });
+}
+
+// Example usage
+const listName = 'shareyas';
+
+readMessagesFromList(listName);
