@@ -22,3 +22,35 @@ function readMessagesFromList(listName) {
 const listName = 'shareyas';
 
 readMessagesFromList(listName);
+
+
+Write
+
+// Required modules
+const redis = require('redis');
+
+// Redis client
+const client = redis.createClient({ 
+    host: 'your_host', // Specify the host here
+    port: 9999 // Specify the port here
+});
+
+// Function to write a message to a Redis list
+function writeMessageToList(listName, message) {
+    client.rpush(listName, message, (err, reply) => {
+        if (err) {
+            console.error('Error:', err);
+        } else {
+            console.log('Message written to list:', message);
+        }
+    });
+}
+
+// Example usage
+const listName = 'shareyas';
+const message = 'Hello Shreyas';
+
+writeMessageToList(listName, message);
+
+
+
