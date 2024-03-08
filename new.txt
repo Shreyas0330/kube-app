@@ -1,0 +1,25 @@
+// Required modules
+const redis = require('redis');
+
+// Redis client
+const client = redis.createClient({ 
+    host: 'your_host', // Specify the host here
+    port: 9999 // Specify the port here
+});
+
+// Function to write event message to Redis stream
+function writeMessageToStream(streamName, message) {
+    client.xadd(streamName, '*', 'message', message, (err, messageId) => {
+        if (err) {
+            console.error('Error:', err);
+        } else {
+            console.log('Message written to stream with ID:', messageId);
+        }
+    });
+}
+
+// Example usage
+const streamName = 'shareyas';
+const message = 'Hello Shreyas';
+
+writeMessageToStream(streamName, message);
