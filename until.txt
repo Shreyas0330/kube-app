@@ -1,0 +1,41 @@
+const redis = require('redis');
+const { promisify } = require('util');
+
+async function main() {
+    // Create Redis client
+    const client = redis.createClient();
+    
+    // Promisify Redis client methods
+    const publishAsync = promisify(client.publish).bind(client);
+
+    // Handle errors
+    client.on('error', (err) => {
+        console.error('Redis client error:', err);
+    });
+
+    try {
+        // Connect to Redis
+        await new Promise((resolve, reject) => {
+            client.on('connect', () => {
+                console.log('Connected to Redis');
+                resolve();
+            });
+            client.on('error', (err) => {
+                console.error('Error connecting to Redis:', err);
+                reject(err);
+            });
+        });
+
+        // Publish message to Redis
+        await publishAsync('channelName', 'Hello, Redis!');
+
+        console.log('Message published to Redis');
+    } catch (error) {
+        console.error('Error:', error);
+    } finally {
+        // Close Redis client
+        client.quit();
+    }
+}
+
+main();
