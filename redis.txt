@@ -1,0 +1,21 @@
+const redis = require('redis');
+
+// Connect to Redis server (assuming it's running on default port 6379)
+const client = redis.createClient();
+
+// Handle errors
+client.on('error', (err) => {
+    console.error('Redis Error:', err);
+});
+
+// Publish events
+function publishEvent(event) {
+    client.publish('events', event);
+}
+
+// Example usage
+publishEvent('Event message added to stream with ID: 10');
+publishEvent('Event message added to stream with ID: 12');
+
+// Close the Redis connection when done (optional)
+// client.quit();
