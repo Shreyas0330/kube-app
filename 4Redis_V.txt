@@ -1,56 +1,38 @@
-// Required modules
 const redis = require('redis');
 
-// Redis client
-const client = redis.createClient({ 
-    host: 'your_host', // Specify the host here
-    port: 9999 // Specify the port here
+// Create a Redis client
+const client = redis.createClient();
+
+// Attempt to connect to the Redis server
+client.on('connect', () => {
+  console.log('Connected to Redis server');
+  
+  // Set a test key-value pair
+  client.set('testKey', 'testValue', (err, reply) => {
+    if (err) {
+      console.error('Error setting key:', err);
+      return;
+    }
+    console.log('Key set successfully:', reply);
+
+    // Retrieve the value of the test key
+    client.get('testKey', (err, value) => {
+      if (err) {
+        console.error('Error getting value:', err);
+        return;
+      }
+      console.log('Value of testKey:', value);
+
+      // Optionally, you can close the Redis connection
+      client.quit();
+    });
+  });
 });
 
-// Function to read messages from Redis list
-function readMessagesFromList(listName) {
-    client.lrange(listName, 0, -1, (err, messages) => {
-        if (err) {
-            console.error('Error:', err);
-        } else {
-            console.log('Messages from list:', messages);
-        }
-    });
-}
-
-// Example usage
-const listName = 'shareyas';
-
-readMessagesFromList(listName);
-
-
-Write
-
-// Required modules
-const redis = require('redis');
-
-// Redis client
-const client = redis.createClient({ 
-    host: 'your_host', // Specify the host here
-    port: 9999 // Specify the port here
+// Handle connection errors
+client.on('error', (err) => {
+  console.error('Error connecting to Redis server:', err);
 });
-
-// Function to write a message to a Redis list
-function writeMessageToList(listName, message) {
-    client.rpush(listName, message, (err, reply) => {
-        if (err) {
-            console.error('Error:', err);
-        } else {
-            console.log('Message written to list:', message);
-        }
-    });
-}
-
-// Example usage
-const listName = 'shareyas';
-const message = 'Hello Shreyas';
-
-writeMessageToList(listName, message);
 
 
 
