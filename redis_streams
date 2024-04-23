@@ -1,0 +1,26 @@
+# Add a new entry to the stream
+XADD mystream * field1 value1 field2 value2
+
+# Get the number of entries in the stream
+XLEN mystream
+
+# Get a range of entries in the stream
+XRANGE mystream - + COUNT 10
+
+# Read entries from the stream
+XREAD COUNT 5 STREAMS mystream 0
+
+# Trim the stream to a specified number of items
+XTRIM mystream MAXLEN 1000
+
+# Delete one or more entries from the stream
+XDEL mystream 12345 67890
+
+# Create a consumer group associated with the stream
+XGROUP CREATE mystream mygroup $
+
+# Get information about the stream
+XINFO STREAM mystream
+
+# Get information about consumer groups associated with the stream
+XINFO GROUPS mystream
