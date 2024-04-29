@@ -1,0 +1,92 @@
+1. git init
+   - Initialize a new Git repository in the current directory.
+
+2. git clone [url]
+   - Clone an existing Git repository from a remote URL.
+
+3. git add [file]
+   - Add changes in the specified file to the staging area.
+
+4. git add . [--all]
+   - Add all changes in the working directory to the staging area.
+
+5. git add -p
+   - Interactively add changes in the working directory to the staging area, allowing you to review and selectively stage changes.
+
+6. git restore [file]
+   - Discard changes in the specified file and restore it to the last committed version.
+
+7. git restore --staged [file]
+   - Unstage the specified file, but keep the changes in the working directory.
+
+8. git commit -m "message"
+   - Commit the staged changes to the repository with a descriptive message.
+
+9. git commit --amend
+   - Amend the last commit by adding staged changes to it or modifying its message.
+
+10. git status
+    - Show the current status of the working directory and staging area.
+
+11. git diff
+    - Show the differences between the working directory and the staging area.
+
+12. git diff --staged
+    - Show the differences between the staging area and the last commit.
+
+13. git log
+    - Display the commit history of the repository.
+
+14. git branch
+    - List all branches in the repository.
+
+15. git branch [branch-name]
+    - Create a new branch with the specified name.
+
+16. git checkout [branch-name]
+    - Switch to the specified branch.
+
+17. git checkout -b [branch-name]
+    - Create a new branch and switch to it.
+
+18. git merge [branch-name]
+    - Merge the specified branch into the current branch.
+
+19. git pull
+    - Fetch changes from the remote repository and merge them into the current branch.
+
+20. git push
+    - Push local commits to the remote repository.
+
+21. git remote -v
+    - List all remote repositories associated with the local repository.
+
+22. git remote add [name] [url]
+    - Add a new remote repository with the specified name and URL.
+
+23. git rm [file]
+    - Remove the specified file from both the working directory and the repository.
+
+24. git reset [file]
+    - Unstage the specified file, but keep the changes in the working directory.
+
+25. git reset --hard
+    - Discard all changes in the working directory and staging area to match the last commit.
+
+26. git stash
+    - Temporarily save changes in the working directory and staging area to a "stash", allowing you to work on another task without committing the changes.
+
+27. git stash pop
+    - Apply the most recent stash to the working directory and remove it from the stash list.
+
+28. git stash apply
+    - Apply the most recent stash to the working directory without removing it from the stash list.
+
+29. git stash list
+    - List all stashed changes.
+
+30. git config --global user.name "Your Name"
+    - Set the global username for Git.
+
+31. git config --global user.email "your.email@example.com"
+    - Set the global email address for Git.
