@@ -1,0 +1,22 @@
+const redis = require('redis');
+
+// Create a Redis client
+const redisClient = redis.createClient({
+  host: '127.0.0.1', // Redis server host
+  port: 6379,        // Redis server port
+});
+
+// Attempt to connect to the Redis server
+redisClient.on('connect', () => {
+  console.log('Connected to Redis server');
+});
+
+// Error handling
+redisClient.on('error', (err) => {
+  console.error('Error connecting to Redis:', err);
+});
+
+// Close the connection after a short delay
+setTimeout(() => {
+  redisClient.quit();
+}, 1000);
