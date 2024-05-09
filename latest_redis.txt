@@ -1,0 +1,29 @@
+const redis = require('redis');
+
+// Create a Redis client
+const redisClient = redis.createClient({
+  // Update these with your Redis server details
+  host: '127.0.0.1',
+  port: 6379,
+});
+
+// Define the name of your Redis stream
+const streamName = 'myStream';
+
+// Define your JSON event
+const jsonEvent = {
+  id: 1,
+  message: 'Hello, world!',
+};
+
+// Send the JSON event to the Redis stream
+redisClient.xadd(streamName, '*', 'json', JSON.stringify(jsonEvent), (err, response) => {
+  if (err) {
+    console.error('Error:', err);
+  } else {
+    console.log('Event sent successfully. Stream ID:', response);
+  }
+});
+
+// Close the Redis connection when done
+redisClient.quit();
