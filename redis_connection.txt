@@ -2,13 +2,26 @@ const redis = require('redis');
 
 // Create a Redis client
 const redisClient = redis.createClient({
-  host: '127.0.0.1', // Redis server host
+  host: 'localhost', // Redis server host
   port: 6379,        // Redis server port
+  // Add other options as needed (e.g., auth, tls)
 });
 
-// Attempt to connect to the Redis server
+// Test the connection
 redisClient.on('connect', () => {
   console.log('Connected to Redis server');
+
+  // Example: set a key-value pair
+  redisClient.set('testKey', 'testValue', (err, reply) => {
+    if (err) {
+      console.error('Error setting key:', err);
+    } else {
+      console.log('Key set successfully:', reply);
+    }
+
+    // Close the connection when done
+    redisClient.quit();
+  });
 });
 
 // Error handling
@@ -16,7 +29,3 @@ redisClient.on('error', (err) => {
   console.error('Error connecting to Redis:', err);
 });
 
-// Close the connection after a short delay
-setTimeout(() => {
-  redisClient.quit();
-}, 1000);
